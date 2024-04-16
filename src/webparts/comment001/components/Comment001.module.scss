@@ -1,34 +1,145 @@
-@import '~@fluentui/react/dist/sass/References.scss';
-
-.comment001 {
-  overflow: hidden;
-  padding: 1em;
-  color: "[theme:bodyText, default: #323130]";
-  color: var(--bodyText);
-  &.teams {
-    font-family: $ms-font-family-fallbacks;
-  }
+.commentList {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
-.welcome {
-  text-align: center;
+.commentItem {
+  list-style: none;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
-.welcomeImage {
+.commentAdd {
+  margin-bottom: 20px;
+}
+
+.commentInput {
   width: 100%;
-  max-width: 420px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
-.links {
-  a {
-    text-decoration: none;
-    color: "[theme:link, default:#03787c]";
-    color: var(--link); // note: CSS Custom Properties support is limited to modern browsers only
+.commentButton {
+  background-color: #0078d4;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-    &:hover {
-      text-decoration: underline;
-      color: "[theme:linkHovered, default: #014446]";
-      color: var(--linkHovered); // note: CSS Custom Properties support is limited to modern browsers only
-    }
-  }
+.commentButton:hover {
+  background-color: #005a9e;
+}
+
+.commentContainer {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.commentItem {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.commentTop {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.profileImage img {
+  border-radius: 50%;
+}
+
+.commentDetails {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+.commentTitle {
+  display: flex;
+}
+
+.postInfo {
+  display: flex;
+  align-items: center;
+}
+
+.badge {
+  height: 21px;
+  background-color: orange;
+  color: #fff;
+  font-size: 11px;
+  padding: 8px;
+  border-radius: 4px;
+  line-height: 3px;
+}
+
+.video {
+  background-color: #ff6666;
+}
+
+.comments {
+  text-decoration: underline;
+}
+
+.dot {
+  height: 7px;
+  width: 7px;
+  margin-top: 3px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.hitVoting:hover {
+  color: blue;
+}
+
+.hitVoting {
+  cursor: pointer;
+}
+
+.commentText {
+  background-color: #fff;
+  padding: 1rem;
+}
+
+.replySection {
+  display: flex;
+  align-items: center;
+}
+
+.votingIcons {
+  display: flex;
+  align-items: center;
+}
+
+.ml2 {
+  margin-left: 0.5rem;
+}
+
+.mt1 {
+  margin-top: 0.25rem;
+}
+
+.roundedCircle {
+  border-radius: 50%;
+}
+
+.commentDate {
+  font-size: 14px;
+  color: #666666;
+  margin-top: 4px;
 }

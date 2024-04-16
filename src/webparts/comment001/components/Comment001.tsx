@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { IComment001Props } from './IComment001Props';
+import styles from './Comment001.module.scss';
 
 interface IComment {
   Id: number;
   description: string;
+  date: string; 
 }
 
 export const Comment001: React.FunctionComponent<IComment001Props> = (props) => {
@@ -15,10 +17,10 @@ export const Comment001: React.FunctionComponent<IComment001Props> = (props) => 
 
   const loadComments = async () => {
     try {
-      // Simulated API call, replace with your actual API call
-      const response = await fetch(`https://cnexia.sharepoint.com/sites/Cnexia4everyone/_api/web/lists/getByTitle('Comment001V1')/items?$select=Id,description`, {
+      
+      const response = await fetch(`https://cnexia.sharepoint.com/sites/Cnexia4everyone/_api/web/lists/getByTitle('Comment001V1')/items?$select=Id,description,date`, {
         method: 'GET',
-        headers: {
+        headers: {        
           'Accept': 'application/json;odata=nometadata'
         }
       });
@@ -28,7 +30,8 @@ export const Comment001: React.FunctionComponent<IComment001Props> = (props) => 
       const data = await response.json();
       const loadedComments: IComment[] = data.value.map((item: any) => ({
         Id: item.Id,
-        description: item.description
+        description: item.description,
+        date: item.date 
       }));
       setComments(loadedComments);
     } catch (error) {
@@ -36,21 +39,27 @@ export const Comment001: React.FunctionComponent<IComment001Props> = (props) => 
     }
   };
 
-  
-
   return (
-    <section>
-      <div>
-        <h2>Comment List</h2>
-        
-        <ul>
-          {comments.map(comment => (
-            <li key={comment.Id}>
-              <strong>{props.userDisplayName}:</strong> {comment.description}
-            </li>
-          ))}
-        </ul>
-      </div>
+    <section className={styles.commentContainer}>
+      {comments.map(comment => (
+        <div key={comment.Id} className={styles.commentItem}>
+          <div className={styles.commentTop}>
+            <div className={styles.profileImage}>
+            </div>
+            <div className={styles.commentDetails}>
+              <div className={styles.commentTitle}>
+                <h5>{props.userDisplayName}</h5>
+                <span className={styles.commentDate}>{comment.date}</span> 
+              </div>
+            </div>
+          </div>
+          <div className={styles.commentText}>
+            <p>{comment.description}</p>
+          </div>
+          <div className={styles.replySection}>
+          </div>
+        </div>
+      ))}
     </section>
   );
 };
