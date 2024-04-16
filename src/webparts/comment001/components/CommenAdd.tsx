@@ -3,18 +3,17 @@ import styles from './Comment001.module.scss';
 
 interface ICommentAddProps {
   onAddComment: () => void;
+  userDisplayName: string; 
 }
 
-export const CommentAdd: React.FunctionComponent<ICommentAddProps> = ({ onAddComment }) => {
+export const CommentAdd: React.FunctionComponent<ICommentAddProps> = ({ onAddComment, userDisplayName }) => {
   const [newDescription, setNewDescription] = React.useState<string>('');
 
   const handleAddComment = async () => {
     try {
-      
       const currentDate = new Date();
-      const currentTime = currentDate.toLocaleString(); // Convertir en format lisible
+      const currentTime = currentDate.toLocaleString();
 
-     
       const response = await fetch(`https://cnexia.sharepoint.com/sites/Cnexia4everyone/_api/web/lists/getByTitle('Comment001V1')/items`, {
         method: 'POST',
         headers: {
@@ -22,7 +21,8 @@ export const CommentAdd: React.FunctionComponent<ICommentAddProps> = ({ onAddCom
         },
         body: JSON.stringify({
           description: newDescription,
-          date: currentTime // Ajouter l'heure et la date au commentaire
+          date: currentTime, // Ajouter l'heure et la date au commentaire
+          userDisplayName: userDisplayName // Utilisation de userDisplayName provenant des props
         })
       });
 
@@ -30,7 +30,6 @@ export const CommentAdd: React.FunctionComponent<ICommentAddProps> = ({ onAddCom
         throw new Error('Failed to add comment');
       }
 
-      // Appeler la fonction onAddComment pour informer le parent de l'ajout
       onAddComment();
 
       // Effacer le champ de saisie après l'ajout
@@ -41,7 +40,7 @@ export const CommentAdd: React.FunctionComponent<ICommentAddProps> = ({ onAddCom
   };
 
   return (
-    <div className={styles.commentAdd}> 
+    <div className={styles.commentAdd}>
       <h2>Add Comment</h2>
       <input
         type="text"

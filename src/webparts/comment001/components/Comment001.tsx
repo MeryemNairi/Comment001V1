@@ -6,6 +6,7 @@ interface IComment {
   Id: number;
   description: string;
   date: string; 
+  userDisplayName: string;
 }
 
 export const Comment001: React.FunctionComponent<IComment001Props> = (props) => {
@@ -18,7 +19,7 @@ export const Comment001: React.FunctionComponent<IComment001Props> = (props) => 
   const loadComments = async () => {
     try {
       
-      const response = await fetch(`https://cnexia.sharepoint.com/sites/Cnexia4everyone/_api/web/lists/getByTitle('Comment001V1')/items?$select=Id,description,date`, {
+      const response = await fetch(`https://cnexia.sharepoint.com/sites/Cnexia4everyone/_api/web/lists/getByTitle('Comment001V1')/items?$select=Id,description,date,userDisplayName`, {
         method: 'GET',
         headers: {        
           'Accept': 'application/json;odata=nometadata'
@@ -31,7 +32,8 @@ export const Comment001: React.FunctionComponent<IComment001Props> = (props) => 
       const loadedComments: IComment[] = data.value.map((item: any) => ({
         Id: item.Id,
         description: item.description,
-        date: item.date 
+        date: item.date,
+        userDisplayName: item.userDisplayName
       }));
       setComments(loadedComments);
     } catch (error) {
@@ -48,7 +50,7 @@ export const Comment001: React.FunctionComponent<IComment001Props> = (props) => 
             </div>
             <div className={styles.commentDetails}>
               <div className={styles.commentTitle}>
-                <h5>{props.userDisplayName}</h5>
+                <h5>{comment.userDisplayName}</h5>
                 <span className={styles.commentDate}>{comment.date}</span> 
               </div>
             </div>

@@ -14,7 +14,10 @@ export default class Comment001WebPart extends BaseClientSideWebPart<IComment001
     const element = React.createElement(
       'div',
       null,
-      React.createElement(CommentAdd, { onAddComment: this.loadComments.bind(this) }), // Ajout du composant d'ajout de commentaire en haut
+      React.createElement(CommentAdd, {
+        onAddComment: this.loadComments.bind(this),
+        userDisplayName: this.context.pageContext.user.displayName // Passer userDisplayName ici
+      }),
       React.createElement(Comment001, {
         description: this.properties.description,
         userDisplayName: this.context.pageContext.user.displayName
